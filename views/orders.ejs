@@ -1,0 +1,57 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+        <main> 
+            <h1>ORDERS</h1>
+             <div class="orders-page">  
+            <div class="order-list">
+             
+                    <h3>Order number</h3>
+                    <h3>user</h3>
+                    <h3>packs</h3>
+                    <h3>date</h3>
+                
+
+                <% orders.forEach(order => { %>
+          
+                    <p><strong>N°</strong> <%= order.order_id %></p>
+                    <p><%= order.user_name %> <%= order.user_firstname %></p>
+                    <p><%= new Date(order.date).toLocaleDateString() %></p>
+                    
+                    <% if (order.packs.length > 0) { %>
+                    <ul>
+                        <% order.packs.forEach(pack => { %>
+                        <li><%= pack.name %> - Quantity: <%= pack.quantity %></li>
+                        <% }) %>
+                    </ul>
+                    <% } else { %>
+                    <p>No packs in this order.</p>
+                    <% } %>
+                
+                <% }) %>
+
+            </div>
+            <div>
+                <h2>Filters:</h2>
+                <form action="/orders" method="get">
+  <input type="date" name="dateStart" value="<%= filterDateStart %>">
+<input type="date" name="dateEnd" value="<%= filterDateEnd %>">
+<select name="pack">
+  <option value="">Tutti i pacchetti</option>
+  <% packs.forEach(pack => { %>
+    <option value="<%= pack.name %>" 
+      <% if(filterPack === pack.name){ %> selected <% } %>>
+      <%= pack.name %>
+    </option>
+  <% }) %>
+</select>
+
+  <button type="submit">Filtra</button>
+</form>
+            </div>
+            </div>
+            
+
+        </main>
+
+  
+<%- include('partials/footer') %>

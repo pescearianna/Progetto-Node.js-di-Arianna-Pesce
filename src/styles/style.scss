@@ -1,0 +1,99 @@
+*{
+     margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+    margin: 2rem 8rem;
+}
+
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header{
+    background-color: #333;
+    color: white;
+    height: 10vh;
+    padding: 0 4rem;
+    text-align: center;
+    
+    #logo{
+        height: 10vh;
+    }   
+    nav{
+        a{
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1.2rem;
+            &:hover{
+                text-decoration: underline;
+                }
+    }
+}   
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1rem;
+    margin: 1rem 3rem;
+    .pack{
+        padding: 1rem 2rem;
+        .buttons{
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            button{
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1rem;
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+            .delete-btn{
+                background-color: #e74c3c;
+                color: white;
+            }
+        }
+    }
+    .pack > * {
+        padding: 0.3rem 0;
+        
+    }
+}
+
+.orders-page{
+    
+    .order-list{
+        padding: 2rem 1rem;
+        width: 70%;
+        border: solid 2px black;
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        grid-gap:10px;
+       
+    }
+}
+
+
+footer{
+    background-color: #333;
+    color: white;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 4rem;
+    font-size: 1.2rem;
+}

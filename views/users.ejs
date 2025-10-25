@@ -1,0 +1,39 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+        <main>  
+            <h1>USERS</h1>
+            <div class="grid-container">
+            <% data.forEach(user => { %>
+                <div class="user" data-id="<%= user.id %>">
+                
+                    <input type="text" class="user-name" value="<%= user.name %>" disabled>
+                    <input type="text" class="user-firstname" value="<%= user.first_name %>" disabled>
+                    <input type="text" class="user-email" value="<%= user.email %>" disabled>
+                    
+
+                     <div class="buttons">
+                        <button class="modify-btn" data-id="<%= user.id %>" >Modifica</button>
+                         <button class="save-btn" data-id="<%= user.id %>" style="display:none">Salva</button>
+                        <button class="delete-btn" data-id="<%= user.id %>" data-resource="users" data-target="user">Elimina</button>
+                    </div>
+                    
+                </div>
+          
+            <% }); %>
+            </div>
+        </main>
+
+        <div class="formidable">
+            <form action="/users" method="post">
+            <label>New cliente:</label>
+            <input type="text" name="name" value="" ><br>
+            <label>first name:</label>
+            <input type="text" name="firstName" value=""><br>
+            <label>email :</label>
+            <input type="text" name="email" value=""><br><br>
+            <input type="submit" value="Submit">
+    </form>
+        </div> 
+         
+  
+<%- include('partials/footer') %>
