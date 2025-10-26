@@ -27,27 +27,28 @@ async function getOrder(req, res) {
   
 
 
-async function updateOrder(req, res) { const id = req.params.id
-    try{
-        const {byUser, quantity, packId} = req.body
-    const order = await OrdersModel.getOrder(id)
-        if (!order) {
-            return res.status(404).json({ success: false, message: "Order not found" });
-        }
+ async function updateOrder(req, res) { 
+    const id = req.params.id
+     try{
+         const {byUser, quantity, packId} = req.body
+     const order = await OrdersModel.getOrder(id)
+         if (!order) {
+             return res.status(404).json({ success: false, message: "Order not found" });
+         }
 
-        const updateByUser = byUser ? byUser : order.byUser
-        const updateQuantity = quantity ? quantity : order.quantity
+         const updateByUser = byUser ? byUser : order.byUser
+         const updateQuantity = quantity ? quantity : order.quantity
         
-        const updatePackId = packId ? packId : order.packId
+         const updatePackId = packId ? packId : order.packId
 
-        await OrdersModel.updateOrder(id, updateByUser, updateQuantity,  updatePackId)
-        const updatedOrder = await OrdersModel.getOrder(id)
+         await OrdersModel.updateOrder(id, updateByUser, updateQuantity,  updatePackId)
+         const updatedOrder = await OrdersModel.getOrder(id)
     
-    res.status(200).json({success:true, data: updatedOrder})
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
-    }
-}
+     res.status(200).json({success:true, data: updatedOrder})
+     } catch (error) {
+         res.status(500).json({ success: false, message: error.message });
+     }
+ }
 
 
 

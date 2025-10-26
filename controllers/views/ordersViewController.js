@@ -1,11 +1,13 @@
 const OrdersModel = require('../../models/ordersModel');
 const PacksModel = require('../../models/packsModel');
+const UsersModel = require('../../models/usersModel');
 
 async function getAllOrders(req, res) {
     try{
   const filterDateStart = req.query.dateStart || '';
   const filterDateEnd = req.query.dateEnd || '';
   const filterPack = req.query.pack || '';
+  const filterUser = req.query.user || '';
 
   // Prendi gli ordini filtrati (o tutti se i filtri sono vuoti)
   const rows = await OrdersModel.filteredOrder(
@@ -37,9 +39,10 @@ async function getAllOrders(req, res) {
 
   // Prendi tutti i pacchetti per il menu a tendina
   const packs = await PacksModel.getAllPacks();
+  const users = await UsersModel.getAllUsers();
 
   // Passa tutto alla view
-  res.render('orders', { orders, packs, filterDateStart, filterDateEnd, filterPack });
+  res.render('orders', { orders, packs, filterDateStart, filterDateEnd, filterPack, filterUser, users });
   } catch (error) {
     res.status(500).send('Errore nel caricamento degli ordini');
   }
@@ -47,53 +50,63 @@ async function getAllOrders(req, res) {
 
 
 
-async function getOrder(req, res) {
-  const id = req.params.id;
-  const order = await OrdersModel.getOrder(id);
-  res.status(200).json({ success: true, data: order });
-}   
-
-
-async function updateOrder(req, res) { const id = req.params.id
-    const {byUser, quantity, packId} = req.body
-    const order = await OrdersModel.getOrder(id)
-        if (!order) {
-            return res.status(404).json({ success: false, message: "Order non found" });
-        }
-
-    const updateByUser = byUser ? byUser : order.byUser
-        const updateQuantity = quantity ? quantity : order.quantity
-        
-        const updatePackId = packId ? packId : order.packId
-
-        await OrdersModel.updateOrder(id, updateByUser, updateQuantity,  updatePackId)
-        const updatedOrder = await OrdersModel.getOrder(id)
-    
-    res.status(200).json({success:true, data: updatedOrder})
-}
-
-
+// async function getOrder(req, res) {
+//   try {
+//   const id = req.params.id;
+//   const order = await OrdersModel.getOrder(id);
+//   res.status(200).json({ success: true, data: order });
+//   } catch (error) {
+//     res.status(500).render('500.ejs');
+//   }
+// }   
 
 async function createOrder(req, res) {
+  try {
   const { byUser, quantity, packId } = req.body;
   await OrdersModel.createOrder(byUser, quantity, packId);
-  const orders = await OrdersModel.getAllOrders();
-  res.status(201).json({ data: orders });
+  // const orders = await OrdersModel.getAllOrders();
+  res.redirect('/orders');
+    } catch (error) {
+      res.status(500).render('500.ejs');
+    } 
 }
 
-async function deleteOrder(req, res) {
-  try {
-  const id = req.params.id;
-  const order = await OrdersModel.deleteOrder(id);
+
+// async function updateOrder(req, res) { const id = req.params.id
+//     const {byUser, quantity, packId} = req.body
+//     const order = await OrdersModel.getOrder(id)
+//         if (!order) {
+//             return res.status(404).json({ success: false, message: "Order non found" });
+//         }
+
+//     const updateByUser = byUser ? byUser : order.byUser
+//         const updateQuantity = quantity ? quantity : order.quantity
+        
+//         const updatePackId = packId ? packId : order.packId
+
+//         await OrdersModel.updateOrder(id, updateByUser, updateQuantity,  updatePackId)
+//         const updatedOrder = await OrdersModel.getOrder(id)
+    
+//     res.status(200).json({success:true, data: updatedOrder})
+// }
+
+
+
+
+
+// async function deleteOrder(req, res) {
+//   try {
+//   const id = req.params.id;
+//   const order = await OrdersModel.deleteOrder(id);
       
-          if (!order) return res.status(404).redirect('/404');
+//           if (!order) return res.status(404).redirect('/404');
 
-  print('Order deleted');
-  res.status(204).redirect('/orders');
-  } catch (error) {
-      print('Error deleting order:', error);
-      res.status(500).redirect('/orders');
-  }
-}
+//   print('Order deleted');
+//   res.status(204).redirect('/orders');
+//   } catch (error) {
+//       print('Error deleting order:', error);
+//       res.status(500).redirect('/orders');
+//   }
+// }
 
-module.exports = { getAllOrders, getOrder, createOrder, updateOrder, deleteOrder};
+module.exports = { getAllOrders, createOrder};

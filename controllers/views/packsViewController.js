@@ -41,45 +41,45 @@ async function createPack(req, res) {
 }
         
 
+// NO SIVEN ESTOS DOS PORQUE LO MANEJA LA API!!!!
+// async function updatePack(req, res) {
+//     try{
+//     const id = req.params.id
+//     const {name, destination, price} = req.body
+//     const pack = await PacksModel.getPack(id)
+//         if (!pack) {
+//             return res.status(404).render('404.ejs');
+//         }
+
+//         //  if (!name && !destination && !price) {
+//         // return res.status(400).render('packs.ejs', { message: 'Inserisci almeno un campo da aggiornare.' })
+//         // }
+
+
+//         const updateName = name ? name : pack.name
+//         const updateDestination = destination ? destination : pack.destination
+//         const updatePrice = price ? price : pack.price
+
+//         await PacksModel.updatePack(id, updateName, updateDestination, updatePrice)
+//         const updatedPack = await PacksModel.getPack(id)
     
-async function updatePack(req, res) {
-    try{
-    const id = req.params.id
-    const {name, destination, price} = req.body
-    const pack = await PacksModel.getPack(id)
-        if (!pack) {
-            return res.status(404).render('404.ejs');
-        }
-
-        //  if (!name && !destination && !price) {
-        // return res.status(400).render('packs.ejs', { message: 'Inserisci almeno un campo da aggiornare.' })
-        // }
-
-
-        const updateName = name ? name : pack.name
-        const updateDestination = destination ? destination : pack.destination
-        const updatePrice = price ? price : pack.price
-
-        await PacksModel.updatePack(id, updateName, updateDestination, updatePrice)
-        const updatedPack = await PacksModel.getPack(id)
-    
-        res.status(200).redirect('/packs')
-    } catch (error) {
+//         res.status(200).redirect('/packs')
+//     } catch (error) {
          
-            res.status(500).render('500.ejs', { message: 'Errore del server.' })
+//             res.status(500).render('500.ejs', { message: 'Errore del server.' })
         
-        }
-}
+//         }
+// }
 
 
-async function deletePack(req, res) {
-    try {
-    const id = req.params.id
-    await PacksModel.deletePack(id)
-    res.status(204).redirect('/packs')
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Errore durante l\'eliminazione' })
-  }
-}
+// async function deletePack(req, res) {
+//     try {
+//     const id = req.params.id
+//     await PacksModel.deletePack(id)
+//     res.status(200).redirect('/packs')
+//   } catch (err) {
+//     res.status(500).json({ success: false, message: 'Errore durante l\'eliminazione' })
+//   }
+// }
 
-module.exports = { getAllPacks, getPack, createPack, updatePack, deletePack};
+module.exports = { getAllPacks, getPack, createPack};
