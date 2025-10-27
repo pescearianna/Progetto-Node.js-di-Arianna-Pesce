@@ -66,9 +66,12 @@ async function createOrder(req, res) {
 async function deleteOrder(req, res) {
     try {
     const id = req.params.id;
-    const order = await OrdersModel.deleteOrder(id);
+
     
-        if (!order) return res.status(404).json({ success: false, message: 'Order not found' });
+    //elimina el item + orden
+    const deleted = await OrdersModel.deleteOrder(id);
+    
+        if (deleted === 0) return res.status(404).json({ success: false, message: 'Order not found' });
         
     res.status(200).json({ success: true, message: `Order ${id} deleted` });
     } catch (error) {

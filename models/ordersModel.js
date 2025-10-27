@@ -138,7 +138,9 @@ const packExists = await connection.query(
 
 
 async function deleteOrder(id){
-  await pool.query('DELETE FROM orders WHERE id=?', [id])
+  await pool.query('DELETE FROM order_items WHERE order_id=?', [id])
+  const [result] = await pool.query('DELETE FROM orders WHERE id=?', [id])
+  return result.affectedRows;
 }
 
 

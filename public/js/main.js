@@ -101,36 +101,36 @@ console.log("Pack element:", pack);
 });
 
   //SCRIPT PER CATTURARE IL CLICK NEL BOOTONE MODIFICA E PASSARLO AL APP.PUT - orders
-  document.querySelectorAll('.order').forEach(order => {
-    // const modifyBtn = order.querySelector('.modify-btn');
-    // const saveBtn = order.querySelector('.save-btn');
-    const inputs = order.querySelectorAll('input, select');
+  // document.querySelectorAll('.order').forEach(order => {
+  //   // const modifyBtn = order.querySelector('.modify-btn');
+  //   // const saveBtn = order.querySelector('.save-btn');
+  //   const inputs = order.querySelectorAll('input, select');
 
-  modifyBtn.addEventListener("click", () => {
-      inputs.forEach(input => input.disabled = false);
-      modifyBtn.style.display = "none";
-      saveBtn.style.display = "inline-block";
-    });
+  // modifyBtn.addEventListener("click", () => {
+  //     inputs.forEach(input => input.disabled = false);
+  //     modifyBtn.style.display = "none";
+  //     saveBtn.style.display = "inline-block";
+  //   });
 
-    saveBtn.addEventListener("click", async () => {
-      const id = order.dataset.id;
-      const byUser = order.querySelector(".order-user-name").value;
-      const quantity = order.querySelector(".order-quantity").value;
+  //   saveBtn.addEventListener("click", async () => {
+  //     const id = order.dataset.id;
+  //     const byUser = order.querySelector(".order-user-name").value;
+  //     const quantity = order.querySelector(".order-quantity").value;
       
 
-      const response = await fetch(`/api/orders/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, firstName, email })
-      });
+  //     const response = await fetch(`/api/orders/${id}`, {
+  //       method: "PUT",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ name, firstName, email })
+  //     });
 
-      if (response.ok) {
-        alert("Ordine aggiornato con successo!");
-        inputs.forEach(input => input.disabled = true);
-        modifyBtn.style.display = "inline-block";
-        saveBtn.style.display = "none";
-      } else {
-        alert("Errore durante l'aggiornamento");
-      }
-    });
-  });
+  //     if (response.ok) {
+  //       alert("Ordine aggiornato con successo!");
+  //       inputs.forEach(input => input.disabled = true);
+  //       modifyBtn.style.display = "inline-block";
+  //       saveBtn.style.display = "none";
+  //     } else {
+  //       alert("Errore durante l'aggiornamento");
+  //     }
+  //   });
+  // });
