@@ -30,8 +30,8 @@ async function createPack(req, res) {
         if (!name || !destination || !price) {
         return res.status(400).json({ success:false, message: 'Tutti i campi sono obbligatori.' });
         }
-        const orders = await PacksModel.createPack(name, destination, price);
-        res.status(201).json({ success:true, data: orders });
+        const packs = await PacksModel.createPack(name, destination, price);
+        res.status(201).json({ success:true, data: packs });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }

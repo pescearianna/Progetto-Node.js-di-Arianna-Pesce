@@ -69,13 +69,15 @@ console.log("Pack element:", pack);
     const saveBtn = user.querySelector('.save-btn');
     const inputs = user.querySelectorAll('input');
 
-    modifyBtn.addEventListener("click", () => {
+    modifyBtn.addEventListener("click", async (e) => {
+      e.stopPropagation();
       inputs.forEach(input => input.disabled = false);
       modifyBtn.style.display = "none";
       saveBtn.style.display = "inline-block";
     });
 
-    saveBtn.addEventListener("click", async () => {
+    saveBtn.addEventListener("click", async (e) => {
+      e.stopPropagation();
       const id = user.dataset.id;
       const name = user.querySelector(".user-name").value;
       const firstName = user.querySelector(".user-firstname").value;
@@ -101,36 +103,59 @@ console.log("Pack element:", pack);
 });
 
   //SCRIPT PER CATTURARE IL CLICK NEL BOOTONE MODIFICA E PASSARLO AL APP.PUT - orders
-  // document.querySelectorAll('.order').forEach(order => {
-  //   // const modifyBtn = order.querySelector('.modify-btn');
-  //   // const saveBtn = order.querySelector('.save-btn');
-  //   const inputs = order.querySelectorAll('input, select');
+   
+  
+      document.addEventListener('DOMContentLoaded', function() {
+    // La tua riga di codice che stava dando problemi
+    const modifica = document.getElementById("mod-order");
+    const saveOrder = document.getElementById("save-order");
+    const inputsOrder = document.querySelectorAll("select");
 
-  // modifyBtn.addEventListener("click", () => {
-  //     inputs.forEach(input => input.disabled = false);
-  //     modifyBtn.style.display = "none";
-  //     saveBtn.style.display = "inline-block";
-  //   });
+    modifica.addEventListener("click", function() {
+      inputsOrder.forEach(input => input.disabled = false);
+      modifica.style.display = "none";
+        saveOrder.style.display = "inline-block";
+    });
 
-  //   saveBtn.addEventListener("click", async () => {
-  //     const id = order.dataset.id;
-  //     const byUser = order.querySelector(".order-user-name").value;
-  //     const quantity = order.querySelector(".order-quantity").value;
-      
+        
+    saveOrder.addEventListener("click", async () => {
 
-  //     const response = await fetch(`/api/orders/${id}`, {
-  //       method: "PUT",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ name, firstName, email })
-  //     });
+      const id = modifica.dataset.id
+        const byUser = document.querySelector(".user-selected").value;
+        const listPackId = document.querySelectorAll(".pack-selected");
+        const listQuantity = document.querySelectorAll(".order-quantity");
 
-  //     if (response.ok) {
-  //       alert("Ordine aggiornato con successo!");
-  //       inputs.forEach(input => input.disabled = true);
-  //       modifyBtn.style.display = "inline-block";
-  //       saveBtn.style.display = "none";
-  //     } else {
-  //       alert("Errore durante l'aggiornamento");
-  //     }
-  //   });
-  // });
+        const packsData=[];
+
+        
+        listPackId.forEach((pack,index) => {
+          const quantityElement = listQuantity[index];
+         
+          const itemId = pack.closest('li').dataset.intId;
+          
+          packsData.push({unicum: itemId, packId: pack.value, quantity: quantityElement.value});});
+        //prendo il primo valore selezionato
+        
+        
+        
+
+
+      const response = await fetch(`/api/orders/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({byUser: byUser, packs: packsData})
+        });
+        if (response.ok) {
+          alert("Ordine aggiornato con successo!");
+          inputsOrder.forEach(input => input.disabled = true);
+          modifica.style.display = "inline-block";
+          saveOrder.style.display = "none";
+        } else {
+          alert("Errore durante l'aggiornamento");
+        }
+
+
+});
+});
+     
+   

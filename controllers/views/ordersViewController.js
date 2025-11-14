@@ -50,15 +50,40 @@ async function getAllOrders(req, res) {
 
 
 
-// async function getOrder(req, res) {
-//   try {
-//   const id = req.params.id;
-//   const order = await OrdersModel.getOrder(id);
-//   res.status(200).json({ success: true, data: order });
-//   } catch (error) {
-//     res.status(500).render('500.ejs');
-//   }
-// }   
+ async function getOrder(req, res) {
+   try {
+   const id = req.params.id;
+   const rows = await OrdersModel.getOrder(id);
+
+     const filterPack = req.query.pack || '';
+     const filterUser = req.query.user || '';
+
+   if (!rows || rows.length === 0)
+      return res.status(404).render('error.ejs', { message: 'Order not found' });
+
+  const order = {
+            order_id: rows[0].order_id,
+            date: rows[0].date,
+            user_id: rows[0].user_id,
+            user_name: rows[0].user_name,
+            user_firstname: rows[0].user_firstname,
+            packs: rows.map(r => ({
+                name: r.pack_name,
+                quantity: r.quantity,
+                pack_id: r.pack_id, 
+                int_id: r.int_id
+            }))
+            };
+
+    const users = await UsersModel.getAllUsers();
+    const packs = await PacksModel.getAllPacks();
+    const orders = await OrdersModel.getAllOrders();
+
+    res.render('order.ejs', { order, orders, users, filterPack, filterUser, packs });
+   } catch (error) {
+     res.status(500).render('500.ejs');
+   }
+ }   
 
 async function createOrder(req, res) {
   try {
@@ -109,4 +134,4 @@ async function createOrder(req, res) {
 //   }
 // }
 
-module.exports = { getAllOrders, createOrder};
+module.exports = { getAllOrders, getOrder, createOrder};

@@ -5,7 +5,7 @@ const ordersController = require('../../controllers/views/ordersViewController')
 
 router.get('/', ordersController.getAllOrders);
 
-// router.get('/:id', ordersController.getOrder);
+router.get('/:id', ordersController.getOrder);
 
 // router.get('/:filter', ordersController.getAllOrders);
 

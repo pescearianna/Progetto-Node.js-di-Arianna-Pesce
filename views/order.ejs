@@ -1,0 +1,72 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+<main>
+  <h1>ORDER N° <%= order.order_id %></h1>
+
+
+    <p><strong>User:</strong> <%= order.user_name %> <%= order.user_firstname %></p>
+
+    <!-- USER -->
+    <label for="user">User</label>
+    <select class="user-selected" id="user" name="byUser" disabled>
+
+      <% users.forEach(user => { %>
+
+      <option value="<%= user.id %>" <%= (user.id === order.user_id) ? 'selected' : '' %>>
+        <%= user.name %> <%= user.first_name %> <%= orders.by_user %>
+      </option>
+      <% }) %>
+    </select><br>
+
+    <p><strong>Date:</strong> <%= new Date(order.date).toLocaleDateString() %></p>
+
+    <!-- PACKS DETAILS -->
+    <h3>Packs in this order:</h3>
+    <% if (order.packs.length > 0) { %>
+    <ul>
+      <% order.packs.forEach(orderedPack => { %>
+    
+      <li data-pack-id="<%=orderedPack.pack_id%>" data-int-id="<%=orderedPack.int_id%>">
+
+        <label for="packs">Packlist</label>
+        <select class="pack-selected" id="packs" name="pack" disabled>
+
+
+          <% packs.forEach(pack => { %>
+
+          <option value="<%= pack.id %>" <%= (pack.id === orderedPack.pack_id) ? 'selected' : '' %>>
+
+            <%= pack.name %>
+          </option>
+          <% }) %>
+
+        </select>
+
+
+
+        -
+        Quantity: <%= orderedPack.quantity %>
+
+        <label for="quantity">How much </label>
+        <select class="order-quantity" name="quantity" id="quantity" disabled>
+          <option value="1" <%= (1===orderedPack.quantity)? 'selected' : '' %>>1</option>
+          <option value="2" <%= (2===orderedPack.quantity)? 'selected' : '' %>>2</option>
+          <option value="3" <%= (3===orderedPack.quantity)? 'selected' : '' %>>3</option>
+        </select>
+
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No packs in this order.</p>
+    <% } %>
+
+    <button id="mod-order" data-id="<%= order.order_id %>">Modifica</button>
+    <button id="save-order" style="display:none">Salva</button>
+
+
+</main>
+
+
+
+<%- include('partials/footer') %>

@@ -15,8 +15,20 @@
           <div class="order" data-id="<%= order.order_id %>">
             <p><strong>N°</strong> <%= order.order_id %></p>
             <!-- <input type="text" class="order-user-name" value="<%= order.user_firstname %>" disabled> -->
+             <p><%= order.user_name %> <%= order.user_firstname %></p> 
             
-            <p><%= order.user_name %> <%= order.user_firstname %></p> 
+            
+            <!-- <label for="user">User </label>
+                <select id="user" name="byUser" disabled>
+                        
+                            <% users.forEach(user => { %>
+                              <option value="<%= user.id %>" 
+                                <% if(filterUser === user.name){ %> selected <% } %>>
+                                <%= order.user_name %> <%= order.user_firstname %>
+                              </option>
+                            <% }) %>
+            </select><br> -->
+           
             <p><%= new Date(order.date).toLocaleDateString() %></p>
             
             <% if (order.packs.length > 0) { %>
@@ -29,8 +41,9 @@
             <p>No packs in this order.</p>
             <% } %>
             <div class="buttons">
-                <!-- <button class="modify-btn" data-id="<%= order.id %>" >Modifica</button>
-                  <button class="save-btn" data-id="<%= order.id %>" style="display:none">Salva</button> -->
+              <a href="http://localhost:3002/orders/<%= order.order_id %>"><button>Modifica</button></a>
+                <!-- <button class="modify-btn" data-id="<%= order.order_id %>" >Modifica</button>
+                  <button class="save-btn" data-id="<%= order.order_id %>" style="display:none">Salva</button> -->
                 <button class="delete-btn" data-id="<%= order.order_id %>" data-resource="orders" data-target="order">Elimina</button>
             </div>
         </div>
