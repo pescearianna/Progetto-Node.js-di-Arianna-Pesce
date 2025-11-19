@@ -1,13 +1,15 @@
 <%- include('partials/head') %>
 <%- include('partials/nav') %>
 <main>
+  <div class="single-order">
   <h1>ORDER N° <%= order.order_id %></h1>
 
-
-    <p><strong>User:</strong> <%= order.user_name %> <%= order.user_firstname %></p>
+    <div class="flex">
+    <!-- <p><strong>User:</strong> <%= order.user_name %> <%= order.user_firstname %></p> -->
 
     <!-- USER -->
-    <label for="user">User</label>
+     <div class="user">
+    <label for="user"><strong>User:</strong></label>
     <select class="user-selected" id="user" name="byUser" disabled>
 
       <% users.forEach(user => { %>
@@ -17,8 +19,10 @@
       </option>
       <% }) %>
     </select><br>
-
+</div>
     <p><strong>Date:</strong> <%= new Date(order.date).toLocaleDateString() %></p>
+
+    </div>
 
     <!-- PACKS DETAILS -->
     <h3>Packs in this order:</h3>
@@ -27,8 +31,8 @@
       <% order.packs.forEach(orderedPack => { %>
     
       <li data-pack-id="<%=orderedPack.pack_id%>" data-int-id="<%=orderedPack.int_id%>">
-
-        <label for="packs">Packlist</label>
+        <div class="ordered-pack">
+        <label for="packs">Pack's name: </label>
         <select class="pack-selected" id="packs" name="pack" disabled>
 
 
@@ -41,13 +45,14 @@
           <% }) %>
 
         </select>
+        </div>
 
 
 
-        -
-        Quantity: <%= orderedPack.quantity %>
-
-        <label for="quantity">How much </label>
+        
+        <!-- Quantity: <%= orderedPack.quantity %> -->
+          <div class="quantity-ordered">
+        <label for="quantity">Quantity: </label>
         <select class="order-quantity" name="quantity" id="quantity" disabled>
           <option value="1" <%= (1===orderedPack.quantity)? 'selected' : '' %>>1</option>
           <option value="2" <%= (2===orderedPack.quantity)? 'selected' : '' %>>2</option>
@@ -60,11 +65,11 @@
     <% } else { %>
     <p>No packs in this order.</p>
     <% } %>
-
+</div>
     <button id="mod-order" data-id="<%= order.order_id %>">Modifica</button>
     <button id="save-order" style="display:none">Salva</button>
 
-
+</div>
 </main>
 
 

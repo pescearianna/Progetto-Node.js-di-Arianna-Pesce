@@ -2,14 +2,16 @@
 <%- include('partials/nav') %>
 <main>  
     <h1>PACKS</h1>
-    <div class="grid-container">
+<div class="main-content">
+    <div class="container">
+        <div class="title"><div class="pack-name">NAME</div><div class="pack-destination">DESTINATION</div><div class="pack-price">PRICE</div></div>
+
     <% data.forEach(pack => { %>
         <div class="pack" data-id="<%= pack.id %>">
             
-            <input type="text" class="pack-name" value="<%= pack.name %>" disabled>
-            <input type="text" class="pack-destination" value="<%= pack.destination %>" disabled>
-            <!-- <input type="text" class="pack-description" value="<%= pack.description %>" disabled> -->
-            <input type="number" class="pack-price" value="<%= pack.price %>" disabled>
+            <input type="text" class="pack-name disactive-input" value="<%= pack.name %>" disabled>
+            <input type="text" class="pack-destination disactive-input" value="<%= pack.destination %>" disabled>
+           <input type="number" class="pack-price disactive-input" value="<%= pack.price %>" disabled>
 
             <div class="buttons">
                 <button class="modify-btn" data-id="<%= pack.id %>" >Modifica</button>
@@ -22,24 +24,34 @@
         </div>  
     <% }); %>
     </div>
-</main>
 
 <div class="formidable">
-    <h3>New Pack</h3>
+    <h3>Create a new PACK:</h3>
+    
     <form action="/packs" method="post">
-    <label>Pack's name </label>
+        
+    <label>Name: </label><br>
     <input type="text" name="name" value="" ><br>
-    <label>Destination </label>
+    <label>Destination: </label><br>
     <input type="text" name="destination" value=""><br>
-    <label>Price </label>
+    <label>Price: </label><br>
     <input type="text" name="price" value=""><br><br>
-    <input type="submit" value="Submit">
+    <input class="btn-create" type="submit" value="CREATE NEW PACK">
 </form>
-</div>
-
 <% if (typeof alertMessage !== 'undefined') { %>
   <div class="alert alert-danger"><%= alertMessage %></div>
 <% } %>
+</div>
+</div>
+
+
+
+
+</main>
+
+
+
+
        
   
 <%- include('partials/footer') %>

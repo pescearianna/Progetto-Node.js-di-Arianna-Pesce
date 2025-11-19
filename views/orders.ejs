@@ -3,36 +3,30 @@
 <main> 
   <h1>ORDERS</h1>
   <div class="orders-page">  
-  <div class="order-list">
+    <div class="order-list">
       
-            <h3>Order number</h3>
+      <!-- <div><h3>Order number</h3>
             <h3>user</h3>
             <h3>packs</h3>
-            <h3>date</h3>
+            <h3>date</h3></div> -->
+            
         
 
         <% orders.forEach(order => { %>
           <div class="order" data-id="<%= order.order_id %>">
-            <p><strong>N°</strong> <%= order.order_id %></p>
-            <!-- <input type="text" class="order-user-name" value="<%= order.user_firstname %>" disabled> -->
-             <p><%= order.user_name %> <%= order.user_firstname %></p> 
+            <div class="order-details">
+            <p class="item-number"><strong>N°</strong> <%= order.order_id %></p>
+            
+            <p><%= order.user_name %> <%= order.user_firstname %></p> 
             
             
-            <!-- <label for="user">User </label>
-                <select id="user" name="byUser" disabled>
-                        
-                            <% users.forEach(user => { %>
-                              <option value="<%= user.id %>" 
-                                <% if(filterUser === user.name){ %> selected <% } %>>
-                                <%= order.user_name %> <%= order.user_firstname %>
-                              </option>
-                            <% }) %>
-            </select><br> -->
+            
            
             <p><%= new Date(order.date).toLocaleDateString() %></p>
+         
             
             <% if (order.packs.length > 0) { %>
-            <ul>
+            <ul class="list-order">
                 <% order.packs.forEach(pack => { %>
                 <li><%= pack.name %> - Quantity: <%= pack.quantity %></li>
                 <% }) %>
@@ -40,10 +34,11 @@
             <% } else { %>
             <p>No packs in this order.</p>
             <% } %>
+
+          </div>
             <div class="buttons">
               <a href="http://localhost:3002/orders/<%= order.order_id %>"><button>Modifica</button></a>
-                <!-- <button class="modify-btn" data-id="<%= order.order_id %>" >Modifica</button>
-                  <button class="save-btn" data-id="<%= order.order_id %>" style="display:none">Salva</button> -->
+                
                 <button class="delete-btn" data-id="<%= order.order_id %>" data-resource="orders" data-target="order">Elimina</button>
             </div>
         </div>
@@ -51,69 +46,71 @@
 
     </div>
 
+    <div class="formidable">
+            <div class="filters">
+              <h2>Filters:</h2>
+              <form action="/orders" method="get" id="filter-form">
+                <label for="start">Date from:</label><br>
+                <input id="start" type="date" name="dateStart" value="<%= filterDateStart %>"><br>
+                <label for="end">Date end:</label><br>
+                <input id="end" type="date" name="dateEnd" value="<%= filterDateEnd %>"><br>
+                <label for="packs">Packlist</label><br>
+                <select id="packs" name="pack">
 
-  <div>
-    <h2>Filters:</h2>
-    <form action="/orders" method="get" id="filter-form">
-      <label for="start">Date from:</label>
-      <input id="start" type="date" name="dateStart" value="<%= filterDateStart %>">
-      <label for="end">Date end:</label>
-      <input id="end" type="date" name="dateEnd" value="<%= filterDateEnd %>">
-      <label for="packs">Packlist</label>
-      <select id="packs" name="pack">
+                  <option value="">Tutti i pacchetti</option>
 
-        <option value="">Tutti i pacchetti</option>
+                  <% packs.forEach(pack => { %>
+                  <option value="<%= pack.name %>" 
+                  <% if(filterPack === pack.name){ %> selected <% } %>>
+                  <%= pack.name %>
+                  </option>
+                  <% }) %>
 
-        <% packs.forEach(pack => { %>
-        <option value="<%= pack.name %>" 
-        <% if(filterPack === pack.name){ %> selected <% } %>>
-        <%= pack.name %>
-        </option>
-        <% }) %>
-
-      </select>
-      <button type="submit">Filtra</button>
-    </form>
-  </div>
+                </select><br><br>
+                <button class="btn-create" type="submit">Filtra</button>
+              </form>
+            </div>
 
 
-</div>
-    <br><br><br><br><br>
-<div class="formidable">
-    <h3>New Order</h3>
-    <form action="/orders" method="post" id="new-order-form">
-    <!-- <label>Order's number </label>
-    <input type="text" name="number" value="" ><br> -->
     
-    <label for="user">User </label>
-    <select id="user" name="byUser">
-            
-                <% users.forEach(user => { %>
-                  <option value="<%= user.id %>" 
-                    <% if(filterUser === user.name){ %> selected <% } %>>
-                    <%= user.name %>
-                  </option>
-                <% }) %>
-</select><br>
-<label for="quantity">How much </label>
-    <select name="quantity" id="quantity">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-    </select>
-<label>Destination </label>
-    <select name="packId">
-                
-                <% packs.forEach(pack => { %>
-                  <option value="<%= pack.id %>" 
-                    <% if(filterPack === pack.name){ %> selected <% } %>>
-                    <%= pack.name %>
-                  </option>
-                <% }) %>
-</select><br><br>
-    <input type="submit" value="Submit">
-</form>
-</div>
+              <br><br><br><br><br>
+          <div class="create-order">
+              <h3>New Order</h3>
+              <form action="/orders" method="post" id="new-order-form">
+              
+              
+              <label for="user">User: </label>
+              <select id="user" name="byUser">
+                      
+                          <% users.forEach(user => { %>
+                            <option value="<%= user.id %>" 
+                              <% if(filterUser === user.name){ %> selected <% } %>>
+                              <%= user.name %> <%= user.first_name %>
+                            </option>
+                          <% }) %>
+          </select><br>
+
+          <label for="quantity">How much </label><br>
+              <select name="quantity" id="quantity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select><br>
+          <label>Pack </label><br>
+              <select name="packId">
+                          
+                          <% packs.forEach(pack => { %>
+                            <option value="<%= pack.id %>" 
+                              <% if(filterPack === pack.name){ %> selected <% } %>>
+                              <%= pack.name %>
+                            </option>
+                          <% }) %>
+          </select><br><br>
+              <input class="btn-create" type="submit" value="Submit">
+          </form>
+          </div>
+    </div>
+  </div>
 </main>
 
   

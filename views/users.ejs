@@ -2,13 +2,20 @@
 <%- include('partials/nav') %>
         <main>  
             <h1>USERS</h1>
-            <div class="grid-container">
+            <div class="main-content">
+            <div class="container">
+
+
+                <div class="title"><div class="user-name">NAME</div><div class="user-firstname">SURNAME</div><div class="user-email">EMAIL</div></div>
+
+
+
             <% data.forEach(user => { %>
                 <div class="user" data-id="<%= user.id %>">
                 
-                    <input type="text" class="user-name" value="<%= user.name %>" disabled>
-                    <input type="text" class="user-firstname" value="<%= user.first_name %>" disabled>
-                    <input type="text" class="user-email" value="<%= user.email %>" disabled>
+                    <input type="text" class="user-name disactive-input" value="<%= user.name %>" disabled>
+                    <input type="text" class="user-firstname disactive-input" value="<%= user.first_name %>" disabled>
+                    <input type="text" class="user-email disactive-input" value="<%= user.email %>" disabled>
                     
 
                      <div class="buttons">
@@ -17,23 +24,32 @@
                         <button class="delete-btn" data-id="<%= user.id %>" data-resource="users" data-target="user">Elimina</button>
                     </div>
                     
+                            <% if (typeof data.message !== 'undefined') { %>
+            <div class="alert alert-danger"><%= data.message %></div>
+            <% } %>
+
                 </div>
           
             <% }); %>
             </div>
-        </main>
 
-        <div class="formidable">
+
+            <div class="formidable">
+                <h3>Create a new CLIENT:</h3>
             <form action="/users" method="post">
-            <label>New cliente:</label>
+            <label>Name: </label><br>
             <input type="text" name="name" value="" ><br>
-            <label>first name:</label>
+            <label>First name: </label><br>
             <input type="text" name="firstName" value=""><br>
-            <label>email :</label>
+            <label>Email: </label><br>
             <input type="text" name="email" value=""><br><br>
-            <input type="submit" value="Submit">
+            <input class="btn-create" type="submit" value="CREATE NEW CLIENT">
     </form>
         </div> 
+            </div>
+        </main>
+
+        
          
   
 <%- include('partials/footer') %>

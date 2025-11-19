@@ -29,12 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
     modifyBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       inputs.forEach(input => input.disabled = false);
+      inputs.forEach(input => input.classList.remove("disactive-input"));
+      inputs.forEach(input => input.classList.add("active-input"));
       modifyBtn.style.display = "none";
       saveBtn.style.display = "inline-block";
+      
     });
 
     saveBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
+      inputs.forEach(input => input.classList.remove("active-input"));
+      inputs.forEach(input => input.classList.add("disactive-input"));
+      
       const id = pack.dataset.id;
       const name = pack.querySelector(".pack-name").value;
       const destination = pack.querySelector(".pack-destination").value;
@@ -72,12 +78,17 @@ console.log("Pack element:", pack);
     modifyBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
       inputs.forEach(input => input.disabled = false);
+      inputs.forEach(input => input.classList.remove("disactive-input"));
+      inputs.forEach(input => input.classList.add("active-input"));
       modifyBtn.style.display = "none";
       saveBtn.style.display = "inline-block";
     });
 
     saveBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
+      inputs.forEach(input => input.classList.remove("active-input"));
+      inputs.forEach(input => input.classList.add("disactive-input"));
+      
       const id = user.dataset.id;
       const name = user.querySelector(".user-name").value;
       const firstName = user.querySelector(".user-firstname").value;
