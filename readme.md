@@ -4,14 +4,6 @@
 </div>
 
 <br>
-<br>
-
-<!-- <div align='center'>
-  <img src="/src/public/images/screen.JPG" alt="sceen applicazione" style='margin: 10px auto 30px; width:200px'>
-</div> -->
-
-<br>
-<br>
 
 <div align='center'>
 <p>
@@ -26,7 +18,6 @@
 
 ![screenshot](/src/public/images/screen.JPG)
 
-<br>
 <br>
 
 # Orizon Agency
