@@ -40,6 +40,17 @@ main {
     
 }
 
+.presentation{
+    
+    margin: 2rem 6rem;
+   
+    border: 3px solid $violet;
+    border-radius: 8px;
+    @media (max-width: 1024px) {
+        margin: 0 1rem;
+        
+    }
+}
 
 .flex{
     display: flex;
@@ -53,7 +64,11 @@ header{
     height: 10vh;
     padding: 0 4rem;
     text-align: center;
-    
+    @media (max-width: 1024px) {
+        padding: 1rem;
+        height: auto;
+        
+    }
     #logo{
         height: 10vh;
     }   
@@ -69,6 +84,7 @@ header{
                 }
     }
 }   
+
 }
 
 //PACKS PAGE STYLES
@@ -84,17 +100,39 @@ color: $white;
     color: $white;
     
     padding: 1rem 0.5rem;
+     @media (max-width: 900px) {
+            width: 100%;
+        }
+    
+
     .title{
         font-weight: bold;
-    }
-    .pack, .title, .buttons, .user{
-      color: $white;
+        color: $white;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         width: 100%;
         gap: 2rem;
-        
+        @media (max-width: 900px) {
+            display: none;
+        }
+    }
+    .pack, .buttons, .user{
+        color: $white;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        gap: 2rem;
+        @media (max-width: 900px) {
+            display: block;
+            .buttons{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
         .pack-name{
             min-width: 300px;
         }
@@ -129,7 +167,7 @@ color: $white;
 }
         
      
-    }
+    
     .pack, .user{
             border-bottom: solid 1px $bg2-color;
             padding: 0.5rem 0;
@@ -220,6 +258,9 @@ color: $white;
     gap: 2rem;
     justify-content: center;
     align-items: flex-start;
+     @media (max-width: 900px) {
+            display: block;
+        }
     
     .order-list{
         padding: 2rem 1rem;
@@ -230,12 +271,18 @@ color: $white;
         justify-content: space-between;
         align-items: center;
         border-bottom: solid 1px gray;
+        @media (max-width: 900px) {
+            display: block;
+        }
         .order-details{
             display: grid;
             width: 100%;
             grid-template-columns: 5rem auto 8rem;
             gap: 0.5rem;
             margin: 0.5rem 0;
+            @media (max-width: 900px) {
+            display: block;
+        }
             .item-number{
                 grid-row: 1 / span 2;
                font-size: 1.2rem;
@@ -243,6 +290,9 @@ color: $white;
         }
         .list-order{
             margin: 1rem 1rem;
+        }
+        .buttons{
+            margin-bottom: 0.5rem;
         }
        }
        
@@ -267,6 +317,9 @@ color: $white;
         justify-content: space-between;
         align-items: center;
         width: 50%;
+        @media (max-width: 900px) {
+            display: block;
+        }
         
     }
     select{
@@ -281,6 +334,17 @@ li{
         justify-content: flex-start;
         align-items: center;
         gap: 1rem;
+        @media (max-width: 900px) {
+            display: block;
+            .ordered-pack>*{
+                margin-top: 1rem;
+                width: -webkit-fill-available;
+            }
+            .quantity-ordered{
+                margin-top: 1rem;
+            }
+        }
+        
 
 }
 
@@ -325,7 +389,7 @@ footer{
     font-size: 1.2rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1240px) {
     main{
         margin: 2rem 2rem;
         .main-content{
@@ -369,5 +433,7 @@ footer{
 
     
 }
+
+
 
 

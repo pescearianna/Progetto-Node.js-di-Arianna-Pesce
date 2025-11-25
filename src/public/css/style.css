@@ -29,6 +29,17 @@ main {
   min-height: 75vh;
 }
 
+.presentation {
+  margin: 2rem 6rem;
+  border: 3px solid #CBBFD7;
+  border-radius: 8px;
+}
+@media (max-width: 1024px) {
+  .presentation {
+    margin: 0 1rem;
+  }
+}
+
 .flex {
   display: flex;
   justify-content: space-between;
@@ -41,6 +52,12 @@ header {
   height: 10vh;
   padding: 0 4rem;
   text-align: center;
+}
+@media (max-width: 1024px) {
+  header {
+    padding: 1rem;
+    height: auto;
+  }
 }
 header #logo {
   height: 10vh;
@@ -68,10 +85,13 @@ header nav a:hover {
   color: #FCFDFD;
   padding: 1rem 0.5rem;
 }
+@media (max-width: 900px) {
+  .main-content .container {
+    width: 100%;
+  }
+}
 .main-content .container .title {
   font-weight: bold;
-}
-.main-content .container .pack, .main-content .container .title, .main-content .container .buttons, .main-content .container .user {
   color: #FCFDFD;
   display: flex;
   justify-content: flex-start;
@@ -79,32 +99,55 @@ header nav a:hover {
   width: 100%;
   gap: 2rem;
 }
-.main-content .container .pack .pack-name, .main-content .container .title .pack-name, .main-content .container .buttons .pack-name, .main-content .container .user .pack-name {
+@media (max-width: 900px) {
+  .main-content .container .title {
+    display: none;
+  }
+}
+.main-content .container .pack, .main-content .container .buttons, .main-content .container .user {
+  color: #FCFDFD;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+@media (max-width: 900px) {
+  .main-content .container .pack, .main-content .container .buttons, .main-content .container .user {
+    display: block;
+  }
+  .main-content .container .pack .buttons, .main-content .container .buttons .buttons, .main-content .container .user .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.main-content .container .pack-name {
   min-width: 300px;
 }
-.main-content .container .pack .pack-destination, .main-content .container .title .pack-destination, .main-content .container .buttons .pack-destination, .main-content .container .user .pack-destination {
+.main-content .container .pack-destination {
   min-width: 8rem;
 }
-.main-content .container .pack .pack-price, .main-content .container .title .pack-price, .main-content .container .buttons .pack-price, .main-content .container .user .pack-price {
+.main-content .container .pack-price {
   float: right;
   width: 6rem;
 }
-.main-content .container .pack .user-name, .main-content .container .title .user-name, .main-content .container .buttons .user-name, .main-content .container .user .user-name {
+.main-content .container .user-name {
   min-width: 8rem;
 }
-.main-content .container .pack .user-firstname, .main-content .container .title .user-firstname, .main-content .container .buttons .user-firstname, .main-content .container .user .user-firstname {
+.main-content .container .user-firstname {
   min-width: 8rem;
 }
-.main-content .container .pack .user-email, .main-content .container .title .user-email, .main-content .container .buttons .user-email, .main-content .container .user .user-email {
+.main-content .container .user-email {
   min-width: 12rem;
 }
-.main-content .container .pack .disactive-input, .main-content .container .title .disactive-input, .main-content .container .buttons .disactive-input, .main-content .container .user .disactive-input {
+.main-content .container .disactive-input {
   border: none;
   background-color: transparent;
   color: #FCFDFD;
   padding: 0.2rem;
 }
-.main-content .container .pack .active-input, .main-content .container .title .active-input, .main-content .container .buttons .active-input, .main-content .container .user .active-input {
+.main-content .container .active-input {
   border: 1px solid rgb(143, 143, 143);
   background-color: rgb(212, 211, 213);
   padding: 0.2rem;
@@ -189,6 +232,11 @@ header nav a:hover {
   justify-content: center;
   align-items: flex-start;
 }
+@media (max-width: 900px) {
+  .orders-page {
+    display: block;
+  }
+}
 .orders-page .order-list {
   padding: 2rem 1rem;
   width: 70%;
@@ -199,6 +247,11 @@ header nav a:hover {
   align-items: center;
   border-bottom: solid 1px gray;
 }
+@media (max-width: 900px) {
+  .orders-page .order-list .order {
+    display: block;
+  }
+}
 .orders-page .order-list .order .order-details {
   display: grid;
   width: 100%;
@@ -206,12 +259,20 @@ header nav a:hover {
   gap: 0.5rem;
   margin: 0.5rem 0;
 }
+@media (max-width: 900px) {
+  .orders-page .order-list .order .order-details {
+    display: block;
+  }
+}
 .orders-page .order-list .order .order-details .item-number {
   grid-row: 1/span 2;
   font-size: 1.2rem;
 }
 .orders-page .order-list .order .list-order {
   margin: 1rem 1rem;
+}
+.orders-page .order-list .order .buttons {
+  margin-bottom: 0.5rem;
 }
 .orders-page .right-side {
   width: 30%;
@@ -230,6 +291,11 @@ header nav a:hover {
   align-items: center;
   width: 50%;
 }
+@media (max-width: 900px) {
+  .single-order .flex {
+    display: block;
+  }
+}
 .single-order select {
   padding: 0.3rem;
   font-size: 1.2rem;
@@ -241,6 +307,18 @@ header nav a:hover {
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
+}
+@media (max-width: 900px) {
+  .single-order li {
+    display: block;
+  }
+  .single-order li .ordered-pack > * {
+    margin-top: 1rem;
+    width: -webkit-fill-available;
+  }
+  .single-order li .quantity-ordered {
+    margin-top: 1rem;
+  }
 }
 
 #mod-order {
@@ -281,7 +359,7 @@ footer {
   font-size: 1.2rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1240px) {
   main {
     margin: 2rem 2rem;
   }
