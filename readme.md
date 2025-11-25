@@ -1,14 +1,14 @@
 <div align='center'>
         <h1>Orizon - Travel Agency | A Node.js Project</h1>   
-        <p>Managment software for travel agency - API Development<p>
+        <p>Develop a RESTful API for a travel agency<p>
 </div>
 
 <br>
 <br>
 
-<div align='center'>
+<!-- <div align='center'>
   <img src="/src/public/images/screen.JPG" alt="sceen applicazione" style='margin: 10px auto 30px; width:200px'>
-</div>
+</div> -->
 
 <br>
 <br>
@@ -24,7 +24,7 @@
 </p>
 </div>
 
-![screenshot](./assets/img/pc-display.JPG)
+![screenshot](/src/public/images/screen.JPG)
 
 <br>
 <br>
@@ -50,41 +50,41 @@ The goal is to create a backend system that manages users, travel packages, and 
 
 1. PACKS:
 
-GET /api/packs --> Returns the list of travel packages.
-GET /api/packs/:id --> Returns a single (:id) travel package.
-POST /api/packs/ --> create a new travel package.
-PUT /api/packs/:id --> update a specific (:id) travel package.
-DELETE /api/packs/:id --> delete a specific (:id) travel pakage.
+GET /api/packs --> Returns the list of travel packages. <br>
+GET /api/packs/:id --> Returns a single (:id) travel package.<br>
+POST /api/packs/ --> create a new travel package.<br>
+PUT /api/packs/:id --> update a specific (:id) travel package.<br>
+DELETE /api/packs/:id --> delete a specific (:id) travel pakage.<br>
 
 2. USERS
 
-GET /api/users --> Returns the list of users.
-GET /api/users/:id --> Returns a single (:id) user.
-POST /api/users/ --> create a new user.
-PUT /api/users/:id --> update a specific (:id) user.
-DELETE /api/users/:id --> delete a specific (:id) user.
+GET /api/users --> Returns the list of users.<br>
+GET /api/users/:id --> Returns a single (:id) user.<br>
+POST /api/users/ --> create a new user.<br>
+PUT /api/users/:id --> update a specific (:id) user.<br>
+DELETE /api/users/:id --> delete a specific (:id) user.<br>
 
 3. ORDERS
 
-GET /api/orders --> Returns the list of orders.
-GET /api/orders/:id --> Returns a single (:id) order.
-POST /api/orders/ --> create a new order.
-PUT /api/orders/:id --> update a specific (:id) order.
-DELETE /api/orders/:id --> delete a specific (:id) order.
+GET /api/orders --> Returns the list of orders.<br>
+GET /api/orders/:id --> Returns a single (:id) order.<br>
+POST /api/orders/ --> create a new order.<br>
+PUT /api/orders/:id --> update a specific (:id) order.<br>
+DELETE /api/orders/:id --> delete a specific (:id) order.<br>
 
 
 ---
 
 ## Database
 
-The migrations.sql file in /database folder includes all SQL statements needed to reconstruct the database:
--Table creation
--Relationships
--Initial seed data
+The migrations.sql file in /database folder includes all SQL statements needed to reconstruct the database:<br>
+-Table creation<br>
+-Relationships<br>
+-Initial seed data<br>
 <br>
 
 To recreate the database:
-<pre> ```bash npm install npm run dev mysql -u root -p < migrations.sql ``` </pre>
+<pre> npm install npm run dev mysql -u root -p < migrations.sql </pre>
 
 ---
 
@@ -92,33 +92,33 @@ To recreate the database:
 ## Setup & Installation 
 
 1. Clone the repository
-<pre> ```bash git clone https://github.com/your-username/orizon.git
-cd orizon ``` </pre>
+<pre>  git clone https://github.com/your-username/orizon.git
+cd orizon  </pre>
 
 
 2. Install dependencies
-<pre>```bash npm install ```</pre>
+<pre> npm install </pre>
 
 3. Create a .env file
 
 Example:
-<pre>```bash 
+<pre> 
 MYSQL_HOST = local
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = ''
 MYSQL_DATABASE = 'horizon'
 PORT= 3000
-```</pre>
+</pre>
 
 4. Start the server
 
 Production:
-<pre>```bash npm start ```</pre>
+<pre> npm start </pre>
 
 
 
 Development:
-<pre>```bash npm run dev ```</pre>
+<pre> npm run dev </pre>
 
 ---  
 
