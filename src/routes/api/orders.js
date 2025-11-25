@@ -12,5 +12,4 @@ router.post('/', ordersApiController.createOrder);
 
 router.delete('/:id', ordersApiController.deleteOrder);
 
-
 module.exports = router;

@@ -1,12 +1,43 @@
+
+$bg-color: #182842;
+$bg2-color: #24344E;
+$green: #C6E9A7;
+$sky: #2AC9E7;
+$violet:#CBBFD7;
+$white: #FCFDFD;
+$grey: #838FA2;
+
+
 *{
-     margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: $bg-color;
+    color: $white;
+}
+
+.green-bg{
+    background-color: $green;
+    color: $bg-color;
+}
+
+.sky-bg{
+    background-color: $sky;
+    color: $bg-color;
+}
+
+.violet-bg{
+    background-color: $violet;
+    color: $bg-color;
 }
 
 main {
     margin: 2rem 8rem;
     min-height: 75vh;
+    
 }
 
 
@@ -17,8 +48,8 @@ main {
 }
 
 header{
-    background-color: #333;
-    color: white;
+    background-color: $bg2-color;
+    color: $white;
     height: 10vh;
     padding: 0 4rem;
     text-align: center;
@@ -28,12 +59,13 @@ header{
     }   
     nav{
         a{
-            color: white;
+            color: $white;
             text-decoration: none;
             margin: 0 1rem;
             font-size: 1.2rem;
             &:hover{
                 text-decoration: underline;
+                color: $violet;
                 }
     }
 }   
@@ -46,16 +78,17 @@ header{
     gap: 2rem;
     justify-content: center;
     align-items: flex-start;
-
+color: $white;
 .container{
     width: 70%;
+    color: $white;
     
     padding: 1rem 0.5rem;
     .title{
         font-weight: bold;
     }
     .pack, .title, .buttons, .user{
-      
+      color: $white;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -84,7 +117,7 @@ header{
         .disactive-input {
             border: none;
             background-color: transparent;
-            color: black;
+            color: $white;
             padding: 0.2rem;
         }
         .active-input{
@@ -98,7 +131,7 @@ header{
      
     }
     .pack, .user{
-            border-bottom: solid 1px gray;
+            border-bottom: solid 1px $bg2-color;
             padding: 0.5rem 0;
            
         }
@@ -130,34 +163,54 @@ header{
             }
             .delete-btn{
                 background-color: #e74c3c;
-                color: white;
+                color: $white;
             }
         }
 
         
 .formidable{
-    background-color: #e5f2f4;
-    border: solid 2px rgb(161, 163, 176);
+    background-color: $green;
+    border: solid 2px #abca90;
+    color: $bg-color;
     border-radius: 20px;
     padding: 1rem 0.5rem;
     width: 30%;
+    h3{
+        padding: 0.5rem;
+    }
     form{
         padding: 1rem 0.5rem;
+        .container-dates{
+            display: flex;
+            justify-content: space-between;
+            .input{
+                width: auto;
+            }
+        }
        
        input{
         width: 100%;
         padding: 0.3rem 0.2rem;
         margin-bottom: 0.5rem;
-        min-height: 3rem;
+        min-height: 2rem;
+        border-radius: 5px;
+        border: none;
     } 
     .btn-create{
-        background-color: aquamarine;
+        background-color: $bg-color;
+        color: $green;
         border-radius: 20px;
         width: 100%;
     padding: 0.3rem 0.2rem;
     margin-bottom: 0.5rem;
     min-height: 3rem;
+    
+    &:hover{
+        background-color: $green;
+        color: $bg-color;
+        border: 1px solid $bg-color;
     }
+}
     }
     
 }
@@ -261,8 +314,8 @@ li{
     
 
 footer{
-    background-color: #333;
-    color: white;
+    background-color: $bg2-color;
+    color: $white;
     height: 10vh;
     display: flex;
     justify-content: center;
@@ -271,4 +324,50 @@ footer{
     padding: 0 4rem;
     font-size: 1.2rem;
 }
+
+@media (max-width: 1024px) {
+    main{
+        margin: 2rem 2rem;
+        .main-content{
+            display: block;
+        }
+        .container{
+            width: 100%;
+        }
+        .formidable{
+            width: 100%;
+            margin-top: 2rem;
+        }
+        }
+
+        .orders-page{
+            display: block;
+            .formidable{
+                width: 100%;
+                margin-top: 2rem;
+               
+                .container-dates{
+                justify-content: flex-start;
+                gap: 1rem;
+            }
+             select{
+                width: 100%;
+                padding: 0.3rem 0.2rem;
+                margin-bottom: 0.5rem;
+                min-height: 2rem;
+                border-radius: 5px;
+                border: none;
+            } 
+            }
+            
+            .order-list{
+                padding: 0.5rem;
+                width: 100%;
+            }
+        }
+       
+
+    
+}
+
 

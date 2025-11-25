@@ -1,10 +1,11 @@
 {
   "name": "progetto-nodejs-di-arianna-pesce",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "sass:watch": "sass --watch src/styles:public/css"
+    "start": "nodemon src/app.js",
+    "sass:watch": "sass --watch src/public/sass:src/public/css",
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,10 @@
     "mysql2": "^3.14.4"
   },
   "devDependencies": {
+    "chai": "^6.2.1",
+    "mocha": "^11.7.5",
     "nodemon": "^3.1.10",
-    "sass": "^1.93.2"
+    "sass": "^1.93.2",
+    "sinon": "^21.0.0"
   }
 }

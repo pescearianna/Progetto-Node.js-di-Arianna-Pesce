@@ -31,7 +31,7 @@ async function getOrder(req, res) {
             packs: rows.map(r => ({
                 name: r.pack_name,
                 quantity: r.quantity,
-                pack_id: r.pack_id,   // <-- ora arriva dalla query
+                pack_id: r.pack_id, 
                 int_id: r.int_id
             }))
             };
@@ -67,7 +67,7 @@ async function getOrder(req, res) {
           for (const packDetails of packs) {
               
                 const { unicum, packId, quantity } = packDetails;
-              //Per ogni elemento nell'array packs, devi dire al database di aggiornare quell'elemento specifico nell'ordine.
+//Per ogni elemento nell'array packs, dire al db di aggiornare quell'elemento specifico nell'ordine.
               
               const itemId = unicum
                 await OrdersModel.updateOrderDetails(id, itemId, packId, quantity);   
@@ -90,6 +90,11 @@ async function getOrder(req, res) {
 async function createOrder(req, res) {
     try {
   const { byUser, quantity, packId } = req.body;
+  if (!byUser || !quantity || !packId) {
+        return res.status(400).json({ success:false, message: 'All fields are required.' });
+        }
+
+        
   await OrdersModel.createOrder(byUser, quantity, packId);
   const orders = await OrdersModel.getAllOrders();
   res.status(201).json({ success:true, data: orders });

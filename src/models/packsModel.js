@@ -1,4 +1,4 @@
-const { pool } = require('../database');
+const { pool } = require('../../database');
 
 async function getAllPacks() {
   const [rows] = await pool.query('SELECT * FROM packs');

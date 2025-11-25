@@ -28,7 +28,7 @@ async function createPack(req, res) {
         const destination = req.body.destination
         const price = req.body.price
         if (!name || !destination || !price) {
-        return res.status(400).json({ success:false, message: 'Tutti i campi sono obbligatori.' });
+        return res.status(400).json({ success:false, message: 'All fields are required.' });
         }
         const packs = await PacksModel.createPack(name, destination, price);
         res.status(201).json({ success:true, data: packs });

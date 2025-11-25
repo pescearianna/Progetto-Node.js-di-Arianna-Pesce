@@ -48,12 +48,15 @@
 
     <div class="formidable">
             <div class="filters">
-              <h2>Filters:</h2>
+              <h3>Filters:</h3>
               <form action="/orders" method="get" id="filter-form">
-                <label for="start">Date from:</label><br>
-                <input id="start" type="date" name="dateStart" value="<%= filterDateStart %>"><br>
-                <label for="end">Date end:</label><br>
-                <input id="end" type="date" name="dateEnd" value="<%= filterDateEnd %>"><br>
+                <div class="container-dates">
+                  <div><label for="start">Date from:</label><br>
+                <input id="start" type="date" name="dateStart" value="<%= filterDateStart %>"><br></div>
+                <div><label for="end">Date end:</label><br>
+                <input id="end" type="date" name="dateEnd" value="<%= filterDateEnd %>"></div>
+                </div>
+                <br>
                 <label for="packs">Packlist</label><br>
                 <select id="packs" name="pack">
 
@@ -73,9 +76,9 @@
 
 
     
-              <br><br><br><br><br>
+              <br><br><br>
           <div class="create-order">
-              <h3>New Order</h3>
+              <h3>Place a new Order</h3>
               <form action="/orders" method="post" id="new-order-form">
               
               

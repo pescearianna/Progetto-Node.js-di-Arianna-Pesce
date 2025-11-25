@@ -4,6 +4,26 @@
   box-sizing: border-box;
 }
 
+body {
+  background: #182842;
+  color: #FCFDFD;
+}
+
+.green-bg {
+  background-color: #C6E9A7;
+  color: #182842;
+}
+
+.sky-bg {
+  background-color: #2AC9E7;
+  color: #182842;
+}
+
+.violet-bg {
+  background-color: #CBBFD7;
+  color: #182842;
+}
+
 main {
   margin: 2rem 8rem;
   min-height: 75vh;
@@ -16,8 +36,8 @@ main {
 }
 
 header {
-  background-color: #333;
-  color: white;
+  background-color: #24344E;
+  color: #FCFDFD;
   height: 10vh;
   padding: 0 4rem;
   text-align: center;
@@ -26,13 +46,14 @@ header #logo {
   height: 10vh;
 }
 header nav a {
-  color: white;
+  color: #FCFDFD;
   text-decoration: none;
   margin: 0 1rem;
   font-size: 1.2rem;
 }
 header nav a:hover {
   text-decoration: underline;
+  color: #CBBFD7;
 }
 
 .main-content {
@@ -40,15 +61,18 @@ header nav a:hover {
   gap: 2rem;
   justify-content: center;
   align-items: flex-start;
+  color: #FCFDFD;
 }
 .main-content .container {
   width: 70%;
+  color: #FCFDFD;
   padding: 1rem 0.5rem;
 }
 .main-content .container .title {
   font-weight: bold;
 }
 .main-content .container .pack, .main-content .container .title, .main-content .container .buttons, .main-content .container .user {
+  color: #FCFDFD;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -77,7 +101,7 @@ header nav a:hover {
 .main-content .container .pack .disactive-input, .main-content .container .title .disactive-input, .main-content .container .buttons .disactive-input, .main-content .container .user .disactive-input {
   border: none;
   background-color: transparent;
-  color: black;
+  color: #FCFDFD;
   padding: 0.2rem;
 }
 .main-content .container .pack .active-input, .main-content .container .title .active-input, .main-content .container .buttons .active-input, .main-content .container .user .active-input {
@@ -87,7 +111,7 @@ header nav a:hover {
   border-radius: 5px;
 }
 .main-content .container .pack, .main-content .container .user {
-  border-bottom: solid 1px gray;
+  border-bottom: solid 1px #24344E;
   padding: 0.5rem 0;
 }
 .main-content .container .pack > *, .main-content .container .user > * {
@@ -112,32 +136,51 @@ header nav a:hover {
 }
 .buttons .delete-btn {
   background-color: #e74c3c;
-  color: white;
+  color: #FCFDFD;
 }
 
 .formidable {
-  background-color: #e5f2f4;
-  border: solid 2px rgb(161, 163, 176);
+  background-color: #C6E9A7;
+  border: solid 2px #abca90;
+  color: #182842;
   border-radius: 20px;
   padding: 1rem 0.5rem;
   width: 30%;
 }
+.formidable h3 {
+  padding: 0.5rem;
+}
 .formidable form {
   padding: 1rem 0.5rem;
+}
+.formidable form .container-dates {
+  display: flex;
+  justify-content: space-between;
+}
+.formidable form .container-dates .input {
+  width: auto;
 }
 .formidable form input {
   width: 100%;
   padding: 0.3rem 0.2rem;
   margin-bottom: 0.5rem;
-  min-height: 3rem;
+  min-height: 2rem;
+  border-radius: 5px;
+  border: none;
 }
 .formidable form .btn-create {
-  background-color: aquamarine;
+  background-color: #182842;
+  color: #C6E9A7;
   border-radius: 20px;
   width: 100%;
   padding: 0.3rem 0.2rem;
   margin-bottom: 0.5rem;
   min-height: 3rem;
+}
+.formidable form .btn-create:hover {
+  background-color: #C6E9A7;
+  color: #182842;
+  border: 1px solid #182842;
 }
 
 .orders-page {
@@ -227,8 +270,8 @@ header nav a:hover {
 }
 
 footer {
-  background-color: #333;
-  color: white;
+  background-color: #24344E;
+  color: #FCFDFD;
   height: 10vh;
   display: flex;
   justify-content: center;
@@ -236,6 +279,45 @@ footer {
   text-align: center;
   padding: 0 4rem;
   font-size: 1.2rem;
+}
+
+@media (max-width: 1024px) {
+  main {
+    margin: 2rem 2rem;
+  }
+  main .main-content {
+    display: block;
+  }
+  main .container {
+    width: 100%;
+  }
+  main .formidable {
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .orders-page {
+    display: block;
+  }
+  .orders-page .formidable {
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .orders-page .formidable .container-dates {
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+  .orders-page .formidable select {
+    width: 100%;
+    padding: 0.3rem 0.2rem;
+    margin-bottom: 0.5rem;
+    min-height: 2rem;
+    border-radius: 5px;
+    border: none;
+  }
+  .orders-page .order-list {
+    padding: 0.5rem;
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
