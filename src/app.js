@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // VIEWS CONFIG
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs"); // <── QUESTA MANCA !!
+app.set("view engine", "ejs");
 
 // HOME
 app.get("/", (req, res) => {
