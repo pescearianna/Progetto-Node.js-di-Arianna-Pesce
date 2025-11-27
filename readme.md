@@ -60,6 +60,17 @@ POST /api/orders/ --> create a new order.<br>
 PUT /api/orders/:id --> update a specific (:id) order.<br>
 DELETE /api/orders/:id --> delete a specific (:id) order.<br>
 
+4. FILTERS
+
+GET /api/orders?dateStart=2025-01-01&dateEnd=2025-12-31&pack=1&user=1
+<br>
+
+Parameters:<br>
+- dateStart: yyyy/mm/dd<br>
+- dateEnd: yyyy/mm/dd<br>
+- pack: id<br>
+- user: id<br>
+<br>
 
 ---
 

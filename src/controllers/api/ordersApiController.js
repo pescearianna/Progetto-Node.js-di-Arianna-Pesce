@@ -4,8 +4,19 @@ const { updatePack } = require('../../models/packsModel');
 
 async function getAllOrders(req, res) {
     try {
-    const { dateStart, dateEnd, pack } = req.query;
-    const orders = await OrdersModel.filteredOrder(dateStart, dateEnd, pack);
+  const dateStart = req.query.dateStart || '';
+  const dateEnd = req.query.dateEnd || '';
+  const pack = req.query.pack || '';
+  const user = req.query.user || '';
+
+const orders = await OrdersModel.filteredOrder(
+    dateStart || '1970-01-01',
+    dateEnd || '2100-12-31',
+    pack || null,
+    user || null
+  );
+
+ 
     res.status(200).json({ success: true, data: orders });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

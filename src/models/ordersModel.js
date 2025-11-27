@@ -40,22 +40,30 @@ LEFT JOIN packs
     return rows; //sennò mi torna un array con un oggetto
 }
 
-async function filteredOrder(filterDateStart, filterDateEnd, filterPack){
+async function filteredOrder(filterDateStart, filterDateEnd, filterPack, filterUser) {
+
   const conditions = [];
-  const values=[]
- if (filterDateStart) {
-    conditions.push('orders.date >= ?');
+  const values = [];
+
+  if (filterDateStart) {
+    conditions.push("orders.date >= ?");
     values.push(filterDateStart);
   }
+
   if (filterDateEnd) {
-    conditions.push('orders.date <= ?');
+    conditions.push("orders.date <= ?");
     values.push(filterDateEnd);
   }
 
-if (filterPack) {
-  conditions.push('packs.name = ?');
-  values.push(filterPack);
-}
+  if (filterPack) {
+    conditions.push("order_items.pack_id = ?");
+    values.push(filterPack);
+  }
+
+  if (filterUser) {
+    conditions.push("orders.by_user = ?");
+    values.push(filterUser);
+  }
 
 let sql = `
     SELECT 

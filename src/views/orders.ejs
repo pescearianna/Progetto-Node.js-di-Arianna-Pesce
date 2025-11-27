@@ -60,16 +60,29 @@
                 <label for="packs">Packlist</label><br>
                 <select id="packs" name="pack">
 
-                  <option value="">Tutti i pacchetti</option>
+                  <option value="">All packs</option>
 
                   <% packs.forEach(pack => { %>
-                  <option value="<%= pack.name %>" 
+                  <option value="<%= pack.id %>" 
                   <% if(filterPack === pack.name){ %> selected <% } %>>
                   <%= pack.name %>
                   </option>
                   <% }) %>
 
-                </select><br><br>
+                </select><br>
+                <label for="users">Users</label><br>
+                <select id="users" name="user">
+
+                  <option value="">All users</option>
+
+                  <% users.forEach(user => { %>
+                  <option value="<%= user.id %>" 
+                  <% if(filterUser === user.name){ %> selected <% } %>>
+                              <%= user.name %> <%= user.first_name %>
+                            </option>
+                          <% }) %>
+                </select>
+                <br><br>
                 <button class="btn-create" type="submit">Filtra</button>
               </form>
             </div>
