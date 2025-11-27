@@ -5,7 +5,7 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-const port = process.env.PORT || 3002;
+const port = process.env.DB_PORT || 3002;
 
 const packsRoutes = require('./routes/views/packs');
 const usersRoutes = require('./routes/views/users');

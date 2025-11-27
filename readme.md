@@ -26,11 +26,8 @@
 
 Node.js Project by Arianna Pesce | Back-End Development | start2impact University
 
-Visit the site:
-https://pescearianna.github.io/Progetto-JavaScript-di-Arianna-Pesce/
-
 Orizon is a Node.js project that provides a RESTful API for a travel agency.
-The goal is to create a backend system that manages users, travel packages, and orders, offering a clear and scalable structure.
+The goal is to create a backend system that manages users, travel packages, and orders, offering a clear and scalable structure.<br>
 <br>
 **Endpoints for api**: .../api/packs<br>
 **Endpoints for frontend**: .../packs
@@ -75,7 +72,7 @@ The migrations.sql file in /database folder includes all SQL statements needed t
 <br>
 
 To recreate the database:
-<pre> npm install npm run dev mysql -u root -p < migrations.sql </pre>
+<pre> mysql -u your_mysql_user -p your_database_name < database/migrations.sql </pre>
 
 ---
 
@@ -83,8 +80,8 @@ To recreate the database:
 ## Setup & Installation 
 
 1. Clone the repository
-<pre>  git clone https://github.com/your-username/orizon.git
-cd orizon  </pre>
+<pre>  git clone https://github.com/pescearianna/Progetto-Node.js-di-Arianna-Pesce.git
+       cd Progetto-Node.js-di-Arianna-Pesce  </pre>
 
 
 2. Install dependencies
@@ -94,22 +91,17 @@ cd orizon  </pre>
 
 Example:
 <pre> 
-MYSQL_HOST = local
-MYSQL_USER = 'root'
-MYSQL_PASSWORD = ''
-MYSQL_DATABASE = 'horizon'
-PORT= 3000
+MYSQL_HOST = localhost
+DB_USER= your_mysql_user
+DB_PASSWORD= your_mysql_password
+DB_NAME= your_database_name
+DB_PORT= 3000
 </pre>
 
 4. Start the server
 
 Production:
-<pre> npm start </pre>
-
-
-
-Development:
-<pre> npm run dev </pre>
+<pre> npm run start </pre>
 
 ---  
 
