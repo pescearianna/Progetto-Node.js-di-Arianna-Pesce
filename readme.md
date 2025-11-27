@@ -31,8 +31,8 @@ https://pescearianna.github.io/Progetto-JavaScript-di-Arianna-Pesce/
 
 Orizon is a Node.js project that provides a RESTful API for a travel agency.
 The goal is to create a backend system that manages users, travel packages, and orders, offering a clear and scalable structure.
-
-**Endpoints for api**: .../api/packs
+<br>
+**Endpoints for api**: .../api/packs<br>
 **Endpoints for frontend**: .../packs
 
 ---  
