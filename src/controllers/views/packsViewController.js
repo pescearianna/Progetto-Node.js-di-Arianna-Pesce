@@ -5,6 +5,7 @@ async function getAllPacks(req, res) {
     const packs = await PacksModel.getAllPacks();
     res.render("packs.ejs", { data: packs });
   } catch (error) {
+    console.error("Pack ERROR:", error); 
     res.status(500).render("500.ejs");
   }
 }
@@ -16,6 +17,7 @@ async function getPack(req, res) {
     if (!pack) return res.status(404).render("404.ejs");
     res.status(200).render("pack.ejs", { data: pack });
   } catch (error) {
+    console.error("Pack ERROR:", error); 
     res.status(500).render("500.ejs");
   }
 }
@@ -36,6 +38,7 @@ async function createPack(req, res) {
     await PacksModel.createPack(name, destination, price);
     res.redirect("/packs");
   } catch (error) {
+    console.error("Pack ERROR:", error); 
     res.status(500).render("500.ejs");
   }
 }

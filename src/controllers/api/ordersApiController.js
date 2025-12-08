@@ -1,5 +1,5 @@
 const OrdersModel = require("../../models/ordersModel");
-const { updatePack } = require("../../models/packsModel");
+const { pool } = require("../../../database");
 
 async function getAllOrders(req, res) {
   try {
@@ -33,7 +33,7 @@ async function getOrder(req, res) {
 
     const order = {
       order_id: rows[0].order_id,
-      date: rows[0].date,
+      created_at: rows[0].created_at,
       user_id: rows[0].user_id,
       user_name: rows[0].user_name,
       user_firstname: rows[0].user_firstname,
@@ -53,8 +53,12 @@ async function getOrder(req, res) {
 
 async function updateOrder(req, res) {
   const id = req.params.id;
+  const connection = await pool.getConnection();
   try {
+    
+    await connection.beginTransaction();
     const { byUser, packs } = req.body;
+
     const order = await OrdersModel.getOrder(id);
 
     if (!order) {
@@ -66,22 +70,43 @@ async function updateOrder(req, res) {
     const updateByUser = byUser ? byUser : order.user_id;
 
     //ripetere l'azione per ogni pacchetto del array
+    const arrayId = [];
     //tornare il nome del pacchetto e la quantità aggiornata
     for (const packDetails of packs) {
       const { unicum, packId, quantity } = packDetails;
-      //Per ogni elemento nell'array packs, dire al db di aggiornare quell'elemento specifico nell'ordine.
 
       const itemId = unicum;
-      await OrdersModel.updateOrderDetails(id, itemId, packId, quantity);
+      const newId = await OrdersModel.updateOrderDetails(
+        id,
+        itemId,
+        packId,
+        quantity,
+        connection
+      );
+      //pulizia
+      if (itemId) {
+        arrayId.push(itemId);
+      }
+      if (newId) {
+        arrayId.push(newId);
+      }
     }
-
-    await OrdersModel.updateOrderMain(id, updateByUser);
-
+    await OrdersModel.deleteRemovedPack(id, arrayId, connection);
+    
+    await OrdersModel.updateOrderMain(id, updateByUser, connection);
+    await connection.commit();
     const updatedOrder = await OrdersModel.getOrder(id);
 
     res.status(200).json({ success: true, data: updatedOrder });
   } catch (error) {
+    await connection.rollback();
+    console.error("ERRORE FATALE NELLA TRANSAZIONE:", error);
+
     res.status(500).json({ success: false, message: error.message });
+  } finally {
+    if (connection) {
+      connection.release();
+    }
   }
 }
 

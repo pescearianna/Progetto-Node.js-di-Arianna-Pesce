@@ -3,7 +3,7 @@ const { pool } = require("../../database");
 async function getAllOrders() {
   const [rows] = await pool.query(`SELECT 
   orders.id AS order_id,
-  orders.date,
+  orders.created_at,
   users.name AS user_name,
   users.first_name AS user_firstname,
   packs.name AS pack_name,
@@ -23,7 +23,7 @@ async function getOrder(id) {
   const [rows] = await pool.query(
     `SELECT 
   orders.id AS order_id,
-  orders.date,
+  orders.created_at,
   orders.by_user AS user_id,
   users.name AS user_name,
   users.first_name AS user_firstname,
@@ -53,12 +53,12 @@ async function filteredOrder(
   const values = [];
 
   if (filterDateStart) {
-    conditions.push("orders.date >= ?");
+    conditions.push("orders.created_at >= ?");
     values.push(filterDateStart);
   }
 
   if (filterDateEnd) {
-    conditions.push("orders.date <= ?");
+    conditions.push("orders.created_at <= ?");
     values.push(filterDateEnd);
   }
 
@@ -75,7 +75,7 @@ async function filteredOrder(
   let sql = `
     SELECT 
       orders.id AS order_id,
-      orders.date,
+      orders.created_at,
       users.name AS user_name,
       users.first_name AS user_firstname,
       packs.name AS pack_name,
@@ -101,7 +101,7 @@ async function createOrder(byUser, quantity, packId) {
 
   await connection.beginTransaction();
   const [newOrder] = await connection.query(
-    "INSERT INTO orders (by_user, date) VALUES (?, NOW())",
+    "INSERT INTO orders (by_user, created_at) VALUES (?, NOW())",
     [byUser]
   );
 
@@ -116,34 +116,46 @@ async function createOrder(byUser, quantity, packId) {
   return orderId;
 }
 
-async function updateOrderMain(id, byUser) {
-  const connection = await pool.getConnection();
-
-  await connection.beginTransaction();
-
-  await connection.query("UPDATE orders SET by_user=?, date=NOW() WHERE id=?", [
-    byUser,
-    id,
-  ]);
-
-  await connection.commit();
+async function updateOrderMain(id, byUser, connection) {
+  await connection.query(
+    "UPDATE orders SET by_user=?, created_at=NOW() WHERE id=?",
+    [byUser, id]
+  );
 }
 
-async function updateOrderDetails(id, itemId, packId, quantity) {
-  const connection = await pool.getConnection();
-  try {
-    await connection.beginTransaction();
-    await connection.query(
-      "UPDATE order_items SET pack_id = ?, quantity = ? WHERE order_id=? AND id=?",
-      [packId, quantity, id, itemId]
-    );
-    await connection.commit();
-  } catch (err) {
-    await connection.rollback();
-    throw err;
-  } finally {
-    connection.release(); // Rilascia la connessione al pool
+async function updateOrderDetails(id, itemId, packId, quantity, connection) {
+ 
+    if (itemId) {
+      await connection.query(
+        "UPDATE order_items SET pack_id = ?, quantity = ? WHERE order_id=? AND id=?",
+        [packId, quantity, id, itemId]
+      );
+    } else {
+      // Scenario A (Nuovo pacchetto):
+      const result = await connection.query(
+        "INSERT INTO order_items (order_id, pack_id, quantity) VALUES (?, ?, ?)",
+        [id, packId, quantity]
+      );
+  
+      const newId = result.insertId;
+      return newId
+    }
   }
+
+  
+//pulizia Scenario B (Rimozione pacchetto):
+async function deleteRemovedPack(id, arrayId, connection) {
+    if (arrayId.length === 0) {
+        await connection.query(
+            "DELETE FROM order_items WHERE order_id = ?",
+            [id]
+        );
+    } else {
+        await connection.query(
+            "DELETE FROM order_items WHERE order_id=? AND id NOT IN (?)",
+            [id, arrayId]
+        );
+    }
 }
 
 async function deleteOrder(id) {
@@ -160,4 +172,5 @@ module.exports = {
   updateOrderMain,
   deleteOrder,
   filteredOrder,
+  deleteRemovedPack,
 };

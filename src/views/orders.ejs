@@ -22,7 +22,7 @@
             
             
            
-            <p><%= new Date(order.date).toLocaleDateString() %></p>
+            <p><%= new Date(order.created_at).toLocaleDateString() %></p>
          
             
             <% if (order.packs.length > 0) { %>

@@ -5,6 +5,7 @@ async function getAllUsers(req, res) {
     const users = await UsersModel.getAllUsers();
     res.render("users.ejs", { data: users });
   } catch (error) {
+    console.error("User ERROR:", error); 
     res.status(500).render("500.ejs");
   }
 }
@@ -19,6 +20,7 @@ async function getUser(req, res) {
         .json({ success: false, message: "User not found" });
     res.status(200).render("user.ejs", { user: user });
   } catch (error) {
+    console.error("User ERROR:", error); 
     res.status(500).render("500.ejs");
   }
 }
@@ -29,6 +31,7 @@ async function createUser(req, res) {
     await UsersModel.createUser(name, firstName, email);
     res.redirect("/users");
   } catch (error) {
+    console.error("User ERROR:", error); 
     res.status(500).render("500.ejs");
   }
 }

@@ -22,7 +22,7 @@ async function getAllOrders(req, res) {
       if (!ordersMap[row.order_id]) {
         ordersMap[row.order_id] = {
           order_id: row.order_id,
-          date: row.date,
+          created_at: row.created_at,
           user_name: row.user_name,
           user_firstname: row.user_firstname,
           packs: [],
@@ -51,6 +51,7 @@ async function getAllOrders(req, res) {
       users,
     });
   } catch (error) {
+    console.error("Order ERROR:", error); 
     res.status(500).render("500.ejs");
   }
 }
@@ -58,6 +59,7 @@ async function getAllOrders(req, res) {
 async function getOrder(req, res) {
   try {
     const id = req.params.id;
+    id
     const rows = await OrdersModel.getOrder(id);
 
     const filterPack = req.query.pack || "";
@@ -70,7 +72,7 @@ async function getOrder(req, res) {
 
     const order = {
       order_id: rows[0].order_id,
-      date: rows[0].date,
+      created_at: rows[0].created_at,
       user_id: rows[0].user_id,
       user_name: rows[0].user_name,
       user_firstname: rows[0].user_firstname,
@@ -95,6 +97,7 @@ async function getOrder(req, res) {
       packs,
     });
   } catch (error) {
+    console.error("Order ERROR:", error); 
     res.status(500).render("500.ejs");
   }
 }
@@ -105,6 +108,7 @@ async function createOrder(req, res) {
     await OrdersModel.createOrder(byUser, quantity, packId);
     res.redirect("/orders");
   } catch (error) {
+    console.error("Order ERROR:", error); 
     res.status(500).render("500.ejs");
   }
 }
