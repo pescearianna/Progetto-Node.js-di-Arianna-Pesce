@@ -18,17 +18,17 @@ CREATE TABLE `order_items` (
   KEY `fk_orderitems_packs` (`pack_id`),
   CONSTRAINT `fk_orderitems_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `fk_orderitems_packs` FOREIGN KEY (`pack_id`) REFERENCES `packs` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `by_user` int(11) NOT NULL,
-  `date` date NOT NULL,
+  `created_at` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_orders_users` (`by_user`),
   CONSTRAINT `fk_orders_users` FOREIGN KEY (`by_user`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 DROP TABLE IF EXISTS `packs`;
 CREATE TABLE `packs` (
@@ -50,9 +50,9 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `order_items` (`id`, `order_id`, `pack_id`, `quantity`) VALUES
-(1, 1, 1, 1),
-(2, 2, 9, 2),
-(3, 3, 1, 2),
+(1, 1, 2, 2),
+(2, 2, 1, 1),
+(3, 3, 12, 1),
 (4, 4, 5, 1),
 (5, 5, 3, 1),
 (6, 6, 7, 1),
@@ -60,15 +60,14 @@ INSERT INTO `order_items` (`id`, `order_id`, `pack_id`, `quantity`) VALUES
 (8, 8, 4, 2),
 (9, 9, 3, 2),
 (10, 10, 7, 2),
-(11, 1, 3, 2),
 (12, 3, 1, 1),
 (13, 11, 12, 1),
 (14, 12, 13, 1);
-INSERT INTO `orders` (`id`, `by_user`, `date`) VALUES
-(1, 1, '2025-11-18'),
-(2, 1, '2025-11-25'),
-(3, 8, '2025-03-03'),
-(4, 7, '0000-00-00'),
+INSERT INTO `orders` (`id`, `by_user`, `created_at`) VALUES
+(1, 1, '2025-12-08'),
+(2, 1, '2025-12-09'),
+(3, 3, '2025-12-06'),
+(4, 7, '2025-01-01'),
 (5, 6, '2025-04-06'),
 (6, 5, '2025-07-04'),
 (7, 4, '2025-05-05'),
@@ -76,7 +75,10 @@ INSERT INTO `orders` (`id`, `by_user`, `date`) VALUES
 (9, 2, '2025-04-23'),
 (10, 1, '2025-02-13'),
 (11, 10, '2025-01-30'),
-(12, 6, '2025-08-01');
+(12, 6, '2025-08-01'),
+(13, 1, '2025-12-06'),
+(14, 11, '2025-11-27'),
+(15, 1, '2025-12-06');
 INSERT INTO `packs` (`id`, `name`, `destination`, `price`) VALUES
 (1, 'Weekend in Budapest', 'Hunghery', '350.00'),
 (2, 'Andalusia tour by train', 'Spain', '400.00'),
@@ -91,8 +93,8 @@ INSERT INTO `packs` (`id`, `name`, `destination`, `price`) VALUES
 (11, 'Aurora Borealis and Arctic experience', 'Norway', '620.00'),
 (12, 'Costa Rica surf trip adveture', 'Costa Rica', '1400.00'),
 (13, 'Enchanting tour of Marrakech', 'Morocco', '450.00'),
-(31, 'Special Costa Amalfitana', 'Italia', '620.00'),
-(32, 'Bologna', 'Italia', '200.00');
+(14, 'Special Costa Amalfitana', 'Italia', '620.00'),
+(15, 'Bologna', 'Italia', '200.00');
 INSERT INTO `users` (`id`, `name`, `first_name`, `email`) VALUES
 (1, 'Mario', 'Rossi', 'mariorossi@gamail.com'),
 (2, 'Luca', 'Gialli', 'lucagialli@gamail.com'),
