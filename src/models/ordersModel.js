@@ -30,7 +30,7 @@ async function getOrder(id) {
   packs.name AS pack_name,
   order_items.pack_id AS pack_id,
   order_items.quantity,
-  order_items.id AS int_id
+  order_items.id AS id_order_details
 FROM orders
 LEFT JOIN users 
   ON orders.by_user = users.id
@@ -130,20 +130,20 @@ async function updateOrderDetails(id, itemId, packId, quantity, connection) {
         "UPDATE order_items SET pack_id = ?, quantity = ? WHERE order_id=? AND id=?",
         [packId, quantity, id, itemId]
       );
+      return itemId;
     } else {
-      // Scenario A (Nuovo pacchetto):
-      const result = await connection.query(
+      // Scenario A
+      const [result] = await connection.query(
         "INSERT INTO order_items (order_id, pack_id, quantity) VALUES (?, ?, ?)",
         [id, packId, quantity]
       );
   
-      const newId = result.insertId;
-      return newId
+      return result.insertId;
     }
   }
 
   
-//pulizia Scenario B (Rimozione pacchetto):
+//pulizia Scenario B
 async function deleteRemovedPack(id, arrayId, connection) {
     if (arrayId.length === 0) {
         await connection.query(
@@ -151,9 +151,10 @@ async function deleteRemovedPack(id, arrayId, connection) {
             [id]
         );
     } else {
+      const placeholder = arrayId.map(() => '?').join(',');
         await connection.query(
-            "DELETE FROM order_items WHERE order_id=? AND id NOT IN (?)",
-            [id, arrayId]
+            `DELETE FROM order_items WHERE order_id=? AND id NOT IN (${placeholder})`,
+            [id, ...arrayId]
         );
     }
 }

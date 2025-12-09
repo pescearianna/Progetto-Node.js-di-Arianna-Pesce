@@ -41,7 +41,7 @@ async function getOrder(req, res) {
         name: r.pack_name,
         quantity: r.quantity,
         pack_id: r.pack_id,
-        int_id: r.int_id,
+        id_order_details: r.id_order_details,
       })),
     };
 
@@ -60,6 +60,8 @@ async function updateOrder(req, res) {
     const { byUser, packs } = req.body;
 
     const order = await OrdersModel.getOrder(id);
+    
+    
 
     if (!order) {
       return res
@@ -67,15 +69,17 @@ async function updateOrder(req, res) {
         .json({ success: false, message: "Order not found" });
     }
 
+
+
     const updateByUser = byUser ? byUser : order.user_id;
 
     //ripetere l'azione per ogni pacchetto del array
     const arrayId = [];
     //tornare il nome del pacchetto e la quantità aggiornata
     for (const packDetails of packs) {
-      const { unicum, packId, quantity } = packDetails;
+      const { idOrderDetails, packId, quantity } = packDetails;
 
-      const itemId = unicum;
+      const itemId = idOrderDetails;
       const newId = await OrdersModel.updateOrderDetails(
         id,
         itemId,
@@ -84,16 +88,13 @@ async function updateOrder(req, res) {
         connection
       );
       //pulizia
-      if (itemId) {
-        arrayId.push(itemId);
-      }
-      if (newId) {
-        arrayId.push(newId);
-      }
+      arrayId.push(newId);
+    
     }
-    await OrdersModel.deleteRemovedPack(id, arrayId, connection);
+      await OrdersModel.deleteRemovedPack(id, arrayId, connection);
     
     await OrdersModel.updateOrderMain(id, updateByUser, connection);
+
     await connection.commit();
     const updatedOrder = await OrdersModel.getOrder(id);
 
