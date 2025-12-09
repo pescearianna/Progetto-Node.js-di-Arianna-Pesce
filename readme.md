@@ -106,7 +106,7 @@ MYSQL_HOST = localhost
 DB_USER= your_mysql_user
 DB_PASSWORD= your_mysql_password
 DB_NAME= your_database_name
-DB_PORT= 3000
+PORT= 3000
 </pre>
 
 4. Start the server
